@@ -12,8 +12,6 @@ Version 1
 TODO compare and remove non-current customer accounts
 #>
 
-
-Import-Module TassApiFunctions
 Install-Module Microsoft.Graph
 
 #Tass Variables
@@ -27,8 +25,8 @@ $Endpoint = "https://school.domain.tass.cloud/tassweb/api/" #Replace with your T
 
 #External ID Variables
 $EntraExternalIDTenantId = "ExternalIDTenantId" #Replace with your Entra External ID Directory ID
-$ExternalIDParentgGroupId = "ExternalIDParentgGroupId" #Replace with your Entra External ID Parent Group ID
-$Issuer = "domain.onmicrosoft.com" #Replace with your Entra External ID dmoain
+$ExternalIDParentGroupId = "ExternalIDParentGroupId" #Replace with your Entra External ID Parent Group ID
+$Issuer = "domain.onmicrosoft.com" #Replace with your Entra External ID domain
 
 
 #Tass Functions
@@ -242,7 +240,7 @@ ForEach ($Account in ($ParentsGold)) {
             #Add parent to parent group in External ID
             try {
                 Write-Output -Message "$($Account.Email) Account created successfully" 
-                New-MgGroupmember -GroupId $ExternalIDParentgGroupId  -DirectoryObject $user.id 
+                New-MgGroupmember -GroupId $ExternalIDParentGroupId  -DirectoryObject $user.id 
                 $status = "Success"
                 
                 #Set SAML in Tass IDP
